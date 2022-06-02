@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 09:05:20 by caquinta          #+#    #+#             */
-/*   Updated: 2022/06/02 17:58:48 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:34:24 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ int ft_printf(char const *array, ...)
 			}		 	
 
 		 }
-		 ft_putchar_fd(array[x], 1);
-		x++;
+		 else
+		 {
+		 	ft_putchar_fd(array[x], 1);
+			x++;
+		 }
+		 
 	 }
 	   
 	 va_end(ptr);
@@ -82,7 +86,7 @@ int ft_printf(char const *array, ...)
 
 int main()
 {
-	ft_printf("Quiero imprimir una string %s y una letra %c", "hola", 'h');
+	ft_printf("string %s letra %c", "hola", 'h');
 
 	return 0;
 }
