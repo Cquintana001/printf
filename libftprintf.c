@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 09:05:20 by caquinta          #+#    #+#             */
-/*   Updated: 2022/06/02 17:10:43 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/06/02 17:58:48 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,37 @@ int ft_printf(char const *array, ...)
 {
 	va_list ptr;
 	int x;
-
+	char *c;
+	char d;
 	x = 0;
 	va_start(ptr, array);
 	 while(array[x])
 	 {
 		 if(array[x]=='%')
 		 {
-			char *c = va_arg(ptr, char*);
-			ft_putstr_fd(c, 1);
+			 
 			x++;
-			x++; 
+			
+			if(array[x ]=='s')
+			{
+			 	x++;
+				c = va_arg(ptr, char*);
+				ft_putstr_fd(c, 1);
+		 	}
+			if(array[x]=='c')
+			{
+				x++;
+				d = va_arg(ptr, int);
+				ft_putchar_fd(d, 1);
+			}		 	
 
 		 }
 		 ft_putchar_fd(array[x], 1);
 		x++;
 	 }
-	int num = va_arg(ptr, int);
-	char c = va_arg(ptr, int);
+	   
+	 va_end(ptr);
+	 
 
 	 
 
@@ -69,7 +82,7 @@ int ft_printf(char const *array, ...)
 
 int main()
 {
-	ft_printf("Quiero imprimir una string %c y una letra %c", "hola", "h");
+	ft_printf("Quiero imprimir una string %s y una letra %c", "hola", 'h');
 
 	return 0;
 }
