@@ -6,43 +6,23 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 09:05:20 by caquinta          #+#    #+#             */
-/*   Updated: 2022/06/02 18:34:24 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:54:45 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "./Libft/libft.h"
 
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-size_t	ft_strlen(const char *s)
-{	
-	size_t	x;
-
-	x = 0;
-	while (s[x])
-		x++;
-	return (x);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	len;
-
-	len = ft_strlen(s);
-	write(fd, s, len);
-}
-
-int ft_printf(char const *array, ...)
+ 
+ int ft_printf(char const *array, ...)
 {
 	va_list ptr;
 	int x;
-	char *c;
+	  int num;
 	char d;
+	 char *c;
 	x = 0;
 	va_start(ptr, array);
 	 while(array[x])
@@ -64,7 +44,12 @@ int ft_printf(char const *array, ...)
 				d = va_arg(ptr, int);
 				ft_putchar_fd(d, 1);
 			}		 	
-
+			if(array[x]=='p')
+			{
+				x++;
+			  	num = va_arg(ptr,  int);
+				ft_putnbr_fd( num, 1);
+			}		 	
 		 }
 		 else
 		 {
@@ -82,11 +67,36 @@ int ft_printf(char const *array, ...)
 	return 0;
 
 
-}
+} 
 
 int main()
-{
-	ft_printf("string %s letra %c", "hola", 'h');
+{	
+
+	 void *pt;
+
+	 unsigned long int x = pt;
+
+	 printf("el puntero es %p\n", pt);
+	   
+	 
+	ft_printf("string %s letra %c puntero %p", "hola", 'h', pt);
+
+
 
 	return 0;
 }
+
+ int ft_putptr(unsigned long int ptr, char*base)
+ {
+	 int index;
+
+	 while(ptr>0)
+	 {
+		 
+		 index = ptr%16;
+		 ptr = ptr/16;
+		 write(1,base[index-1],1)
+		 
+	 }
+
+ }
