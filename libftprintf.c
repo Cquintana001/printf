@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 09:05:20 by caquinta          #+#    #+#             */
-/*   Updated: 2022/06/05 13:31:02 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/06/05 15:32:50 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@
 			{
 				x++;
 			  	  prueba =  va_arg(ptr, unsigned long int);
-				ft_putptr(prueba, "0123456789abcdef");
+				printf("%s",ft_itoa(prueba));
 			}
 			if(array[x]=='u')
 			{
 				x++;
 			  	  prueba =  va_arg(ptr, unsigned long int);
-				ft_putptr(prueba, "0123456789abcdef");
+				printf("%s",ft_itoa(prueba));
 			}		 		 	
 		 }
 		 else
@@ -123,7 +123,7 @@ int main()
 	 
 
 	  
-	ft_printf("%d" ,5);
+	ft_printf("%d %i" ,5, 6);
 
 
 
