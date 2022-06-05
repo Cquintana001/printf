@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 09:05:20 by caquinta          #+#    #+#             */
-/*   Updated: 2022/06/03 13:54:45 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/06/05 13:31:02 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,43 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "./Libft/libft.h"
+#include <stdlib.h>
 
  
+ void ft_putptr(unsigned long int ptr, char *base)
+ {
+	  
+	 unsigned long int x = 0;
+	char *line = malloc(17);
+	 int j;
+	 j = 0;
+		 
+		 while(ptr>0)
+		 {
+			x = ptr%16;
+		 	ptr = ptr/16;
+			 line[j]=base[x]; 
+			j++;
+		 }
+		 line[j] = '\0';
+		  j--;
+		  write(1,"0X",2);
+		 while(j>=0)
+		 {
+			 write(1,&line[j],1);
+			 j--;
+		 } 
+	  
+	 
+
+ }
+
  int ft_printf(char const *array, ...)
 {
 	va_list ptr;
+	unsigned long int prueba;
 	int x;
-	  int num;
+	   
 	char d;
 	 char *c;
 	x = 0;
@@ -47,9 +77,27 @@
 			if(array[x]=='p')
 			{
 				x++;
-			  	num = va_arg(ptr,  int);
-				ft_putnbr_fd( num, 1);
-			}		 	
+			  	  prueba =  va_arg(ptr, unsigned long int);
+				ft_putptr(prueba, "0123456789abcdef");
+			}
+			if(array[x]=='d')
+			{
+				x++;
+			  	  prueba =  va_arg(ptr, unsigned long int);
+				printf("%s",ft_itoa(prueba));
+			}
+			if(array[x]=='i')
+			{
+				x++;
+			  	  prueba =  va_arg(ptr, unsigned long int);
+				ft_putptr(prueba, "0123456789abcdef");
+			}
+			if(array[x]=='u')
+			{
+				x++;
+			  	  prueba =  va_arg(ptr, unsigned long int);
+				ft_putptr(prueba, "0123456789abcdef");
+			}		 		 	
 		 }
 		 else
 		 {
@@ -71,32 +119,14 @@
 
 int main()
 {	
-
-	 void *pt;
-
-	 unsigned long int x = pt;
-
-	 printf("el puntero es %p\n", pt);
-	   
+	
 	 
-	ft_printf("string %s letra %c puntero %p", "hola", 'h', pt);
+
+	  
+	ft_printf("%d" ,5);
 
 
 
 	return 0;
 }
 
- int ft_putptr(unsigned long int ptr, char*base)
- {
-	 int index;
-
-	 while(ptr>0)
-	 {
-		 
-		 index = ptr%16;
-		 ptr = ptr/16;
-		 write(1,base[index-1],1)
-		 
-	 }
-
- }
