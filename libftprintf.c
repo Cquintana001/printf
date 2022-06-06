@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 09:05:20 by caquinta          #+#    #+#             */
-/*   Updated: 2022/06/06 11:51:28 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/06/06 15:41:04 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 
  
- int ft_putptr(unsigned long int ptr, char *base, int *counter)
+ int printpointer(unsigned long int ptr, char *base, int *counter)
  {
 	counter++; 
 	unsigned long int x;
@@ -46,25 +46,24 @@
 		 return(j);
  }
 
- int ft_putstring(char *array, int *index)
+ int printstring(char *array, int *index)
  {
-	    *index+=1;
 	 int x;
 
- 
-	 ft_putstr_fd(array,1);
-	 x = ft_strlen(array);
-	 return(x);
+	*index+=1;
+	ft_putstr_fd(array,1);
+	x = ft_strlen(array);
+	return(x);
  }
 
-int ft_printfchar(int c, int *index)
+int printchar(int c, int *index)
 {
 	*index+=1;
 	ft_putchar_fd(c, 1);
 	return(1);
 }
 
-int printfint(unsigned long int c,int *index )
+int printinteger(unsigned long int c,int *index )
 {
 	int len;
 
@@ -74,20 +73,23 @@ int printfint(unsigned long int c,int *index )
 	return(len);
 }
 
-int unsignedprintfint(unsigned long int c,int *index)
+int printunsignedinteger(unsigned long int c,int *index)
 {
 	if(c<0)
 	 c = c * -1;
-	return(printfint(c, index));
+	return(printinteger(c, index));
 }
+int printpercent()
+{
+	write(1,"%",1);
+	return(1);
 
+}
  int ft_printf(char const *array, ...)
 {
-	va_list ptr;
-	unsigned long int prueba;
-	int x;	   
-	char d;
-	 
+	va_list ptr; 
+	int x;
+	int bytes;
 
 	x = 0;
 	va_start(ptr, array);
@@ -97,21 +99,21 @@ int unsignedprintfint(unsigned long int c,int *index)
 		 {			 
 			x++;			
 			if(array[x]=='s')
-				ft_putstring((va_arg(ptr, char*)), &x);
+				bytes += printstring((va_arg(ptr, char*)), &x);
 			if(array[x]=='c')
-				ft_printfchar((va_arg(ptr, int)), &x);	 	
+				bytes += printchar((va_arg(ptr, int)), &x);	 	
 			if(array[x]=='p')
-				ft_putptr((va_arg(ptr, unsigned long int)), "0123456789abcdef", &x);
+				bytes += printpointer((va_arg(ptr, unsigned long int)), "0123456789abcdef", &x);
 			if(array[x]=='d' ||array[x]=='i' )
-				printfint(va_arg(ptr, unsigned long int), &x);			 
+				bytes += printinteger(va_arg(ptr, unsigned long int), &x);			 
 			if(array[x]=='u')
-				unsignedprintfint(va_arg(ptr, unsigned long int), &x);
+				bytes += printunsignedinteger(va_arg(ptr, unsigned long int), &x);
 			if(array[x]=='x')				 
-				ft_putptr((va_arg(ptr, unsigned long int)), "0123456789abcdef",&x);		
+				bytes += printpointer((va_arg(ptr, unsigned long int)), "0123456789abcdef",&x);		
 			if(array[x]=='X')	 
-				ft_putptr((va_arg(ptr, unsigned long int)), "0123456789ABCDEF", &x);
+				bytes += printpointer((va_arg(ptr, unsigned long int)), "0123456789ABCDEF", &x);
 			if(array[x]=='%')				 
-			  	  write(1,"%",1);		 		 	
+			  	bytes += printpercent();		 		 	
 		 }
 		 else
 		 {
