@@ -1,27 +1,56 @@
-LIB = ar rcs
-RM = rm -f
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/06/07 17:45:50 by caquinta          #+#    #+#              #
+#    Updated: 2022/06/11 12:06:22 by caquinta         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+
 
 NAME = libftprintf.a
-SRC =	libftprintf.c
+
+SRC = libftprintf.c\
+	  printchar.c\
+	  printinteger.c\
+	  printstring.c\
+	  printunsignedinteger.c\
+	  ft_printf_xxp.c\
+	  
+
 OBJ = $(SRC:.c=.o)
-INCLUDE = libftprintf.h
 
+INCLUDES = ft_printf.h
 
-BONUSOBJ = $(BONUSSRC:.c=.o)
+CC = gcc 
+CFLAGS = -Wall -Wextra -Werror
+AR = ar rc
+RM = rm -f
+MAKE = make
 
 all: $(NAME)
 
-$(NAME): $(OBJ) 
-	$(LIB) $(NAME) $(OBJ)
+%.o : %.c 
+	$(CC) $(CFLAGS) -c $(SRC)  
+
+$(NAME): $(OBJ) $(INCLUDES)
+	$(MAKE) -C	Libft
+	cp Libft/libft.a .
+	mv libft.a $(NAME)
+	$(AR) $(NAME) $(OBJ) 
+
+ 
 
 clean:
-	$(RM) $(OBJ) $(BONUSOBJ)
+	$(RM) $(OBJ)  
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) libft.a
+
 
 re: fclean all
 
