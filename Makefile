@@ -6,7 +6,7 @@
 #    By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 17:45:50 by caquinta          #+#    #+#              #
-#    Updated: 2022/06/11 12:06:22 by caquinta         ###   ########.fr        #
+#    Updated: 2022/06/11 12:57:57 by caquinta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ clean:
 	$(RM) $(OBJ)  
 
 fclean: clean
-	$(RM) $(NAME) libft.a
+	$(RM) $(NAME) libft.a Libft/*.o
 
 
 re: fclean all
