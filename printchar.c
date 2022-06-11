@@ -6,14 +6,14 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:01:38 by caquinta          #+#    #+#             */
-/*   Updated: 2022/06/11 11:40:41 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/06/11 12:32:06 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Libft/libft.h"
 
-int printchar(int c)
+int	printchar(int c)
 {
 	ft_putchar_fd(c, 1);
-	return(1);
+	return (1);
 }
